@@ -1,0 +1,94 @@
+"""Verifică site-uri și antetele lor de securitate."""
+
+import requests
+
+TIMEOUT = 5
+SITES = [
+    "https://cybercor.org",
+    "https://example.com",
+]
+SECURITY_HEAEADERS = [
+    "Content-Security-Policy",
+    "X-Frame-Options",
+    "X-Content-Type-Options",
+]
+
+
+def build_url(host, path):
+    """Construiește o adresă completă, de exemplu https://example.com/login."""
+    host = str(host).strip()
+    if not host.startswith(("http://", "https://")):
+        host = "https://" + host
+    return host.rstrip("/") + "/" + str(path).lstrip("/")
+
+
+def is_https(url):
+    """Returnează True dacă adresa începe cu https://, altfel False."""
+    return str(url).lower().startswith("https://")
+
+
+def show_response(url):
+    """Trimite o cerere GET la adresă și afișează statusul și tipul conținutului."""
+    try:
+        raspuns = requests.get(url, timeout=TIMEOUT)
+        print(f"Status: {raspuns.status_code}")
+        print(f"Tipul conținutului: {raspuns.headers.get('Content-Type', 'lipsește')}")
+        return raspuns
+    except requests.RequestException as eroare:
+        print(f"Eroare: {eroare}")
+        return None
+
+
+def check_site(url):
+    """Returnează statusul, tipul și lungimea conținutului, precum și serverul."""
+    try:
+        raspuns = requests.get(url, timeout=TIMEOUT)
+        return {
+            "status": raspuns.status_code,
+            "content_type": raspuns.headers.get("Content-Type"),
+            "length": len(raspuns.content),
+            "server": raspuns.headers.get("Server"),
+        }
+    except requests.RequestException:
+        return {"status": None, "content_type": None, "length": 0, "server": None}
+
+
+def scan_sites():
+    """Verifică toate site-urile din listă, le afișează pe cele accesibile și un rezumat."""
+    rezultate = [(url, check_site(url)) for url in SITES]
+    functionale = [
+        (url, info)
+        for url, info in rezultate
+        if info["status"] is not None and info["status"] < 400
+    ]
+    for url, info in functionale:
+        print(f"{url} -> {info['status']}")
+    print(f"Site-uri funcționale: {len(functionale)} / {len(SITES)}")
+    return rezultate
+
+
+def check_headers(url):
+    """Returnează antetele de securitate prezente, lipsă și scorul procentual."""
+    try:
+        raspuns = requests.get(url, timeout=TIMEOUT)
+        prezente = [antet for antet in ANTEte_SECURITATE if antet in raspuns.headers]
+    except requests.RequestException:
+        prezente = []
+    lipsa = [antet for antet in ANTEte_SECURITATE if antet not in prezente]
+    scor = round(100 * len(prezente) / len(ANTEte_SECURITATE)) if ANTEte_SECURITATE else 100
+    return {"present": prezente, "missing": lipsa, "score": scor}
+
+
+def retry_check(url, attempts=3):
+    """Încearcă cererea de cel mult «attempts» ori și returnează statusul și numărul încercărilor."""
+    attempts = max(0, int(attempts))
+    status = None
+    incercari = 0
+    for _ in range(attempts):
+        incercari += 1
+        try:
+            status = requests.get(url, timeout=TIMEOUT).status_code
+            break
+        except requests.RequestException:
+            continue
+    return {"status": status, "attempts": incercari}
