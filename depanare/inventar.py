@@ -51,7 +51,7 @@ def main():
     tinte = incarca(a.fisier)
 
 
-    print("Tinte citite: " +str(len(tinta)))
+    print("Tinte citite: " +str(len(tinte)))
 
     grupe = pe_servicii(tinte)
     for serviciu, porturi in grupe.items():
