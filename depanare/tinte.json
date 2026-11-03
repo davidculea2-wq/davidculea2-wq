@@ -1,0 +1,8 @@
+[
+  {"gazda": "192.168.56.101", "serviciu": "ssh", "port": "22"},
+  {"gazda": "192.168.56.102", "serviciu": "http", "port": "80"},
+  {"gazda": "192.168.56.103", "serviciu": "necunoscut", "port": "abc"},
+  {"gazda": "192.168.56.104", "serviciu": "http", "port": "8080"},
+  {"gazda": "192.168.56.105", "serviciu": "mysql", "port": "3306"},
+  {"gazda": "192.168.56.106", "serviciu": "necunoscut", "port": "5432"}
+]
