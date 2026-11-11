@@ -1,0 +1,4 @@
+*/5 * * * * root /usr/local/bin/backup.sh
+0 2 * * * root /home/ana/script.py
+# Comentar cron
+15 4 * * 1 root /usr/bin/apt update

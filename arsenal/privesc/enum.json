@@ -1,0 +1,19 @@
+{
+    "suid": {
+        "gasite": 13,
+        "risc_mare": 4
+    },
+    "sudo": {
+        "gasite": 0,
+        "risc_mare": 0
+    },
+    "cron": {
+        "gasite": 0,
+        "risc_mare": 0
+    },
+    "utilizatori_implicati": [
+        "ana",
+        "root",
+        "www-data"
+    ]
+}

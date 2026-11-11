@@ -1,0 +1,3 @@
+ana ALL=(ALL) NOPASSWD: ALL
+root ALL=(ALL) ALL
+www-data ALL=(www-data) NOPASSWD: /bin/ls

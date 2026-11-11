@@ -1,0 +1,13 @@
+/bin/cp
+/bin/find
+/usr/bin/nmap
+/usr/bin/vim.basic
+/bin/cat
+/bin/ls
+/bin/grep
+/bin/nano
+/bin/more
+/bin/less
+/usr/bin/head
+/usr/bin/tail
+/usr/bin/awk
