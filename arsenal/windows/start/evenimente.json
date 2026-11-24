@@ -1,0 +1,4 @@
+[
+  {"id": 4625, "nivel": "warning", "sursa": "Security", "cont": "administrator", "mesaj": "An account failed to log on"},
+  {"id": 1102, "nivel": "critical", "sursa": "Security", "cont": "administrator", "mesaj": "The audit log was cleared"}
+]

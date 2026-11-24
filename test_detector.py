@@ -1,7 +1,7 @@
 import pytest
 from collections import Counter
 from parse_auth import esec
-from detector import suspecți
+from detector1 import suspecți
 
 def test_esec_valid():
     linie = "Failed password for root from 203.0.113.9 port 51230 ssh2"
